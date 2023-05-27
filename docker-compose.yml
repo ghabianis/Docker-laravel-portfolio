@@ -42,7 +42,7 @@ services:
   app:
     container_name: blog
     build: 
-      context: ./php
+      context: ./src/php
       dockerfile: Dockerfile
     volumes:
       - ./src:/var/www
