@@ -16,27 +16,27 @@ services:
       - db
 
   #Database Service
-  db:
-    image : mysql
-    container_name : mysql
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: blog
-      MYSQL_ROOT_PASSWORD: password
   # db:
-  #   image: postgres
-  #   container_name: postgres
+  #   image : mysql
+  #   container_name : mysql
   #   volumes:
-  #     - ./postgresql/data:/var/lib/postgresql/data
+  #     - ./mysql/data:/var/lib/mysql
   #   ports:
-  #     - "5432:5432"
-  #   environment: 
-  #     POSTGRES_DB: blog
-  #     POSTGRES_USER: root 
-  #     POSTGRES_PASSWORD: password 
+  #     - "3306:3306"
+  #   environment:
+  #     MYSQL_DATABASE: blog
+  #     MYSQL_ROOT_PASSWORD: password
+  db:
+    image: postgres
+    container_name: postgres
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment: 
+      POSTGRES_DB: blog
+      POSTGRES_USER: root 
+      POSTGRES_PASSWORD: password 
 
   # Application Service
   app:
@@ -51,20 +51,20 @@ services:
     working_dir: /var/www
 
   #phpMyAdmin Service
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    ports:
-      - "3400:80"
-    depends_on:
-      - db
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   container_name: pgAdmin
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: phpmyadmin
   #   ports:
-  #     - "5050:80"
+  #     - "3400:80"
   #   depends_on:
-  #     - db 
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: hanieasemi76@gmail.com
-  #     PGADMIN_DEFAULT_PASSWORD: password 
+  #     - db
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgAdmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db 
+    environment:
+      PGADMIN_DEFAULT_EMAIL: anis.ghabi@ipsas.tn
+      PGADMIN_DEFAULT_PASSWORD: password 
