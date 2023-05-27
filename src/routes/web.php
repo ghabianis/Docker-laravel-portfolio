@@ -15,7 +15,7 @@ use App\Http\Controllers\Controller;
 */
 
 // Route::get('/', function () {  
-//     return view('login');
+//     return view('welcome');
 // });
 
 
@@ -26,15 +26,15 @@ use App\Http\Controllers\Controller;
 //         $data = $response->json();
 // });
 
-// Route::get('/', function () {
-//     $response = Http::get('https://tech.dev.ats-digital.com/api/products', [
-//         'size' => 20
-//     ]);
+Route::get('/', function () {
+    $response = Http::get('https://tech.dev.ats-digital.com/api/products', [
+        'size' => 20
+    ]);
     
-//     $data = $response->json();
+    $data = $response->json();
     
-//     return view('welcome', ['data' => $data]);
-// });
+    return view('welcome', ['data' => $data]);
+});
 
 Route::get('/portfolio', function () {  
     return view('portfolio');
