@@ -3,8 +3,8 @@ services:
 
   app:
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: ./src/
+      dockerfile: DockerFile.prod
     image: gdd/laravel
     container_name: myapp
     restart: unless-stopped
