@@ -1,9 +1,8 @@
-FROM php:8.0.23-fpm
+FROM php:8.0-fpm
 
 # Install additional dependencies if needed
-RUN apt-get update \
-    && apt-get install -y \
-       # Add any additional dependencies here
+RUN apt-get update && apt-get install -y \
+    # Add any additional dependencies here
 
 # Copy the application files to the container
 COPY . /var/www/html
