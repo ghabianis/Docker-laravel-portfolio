@@ -1,24 +1,50 @@
 FROM php:8.0-fpm
 
-# Install additional dependencies if needed
-RUN apt-get update && apt-get install -y \
-    # Add any additional dependencies here
+RUN docker-php-ext-install pdo pdo_mysql
 
-# Copy the application files to the container
-COPY . /var/www/html
+RUN apt-get update
 
-# Set the working directory
-WORKDIR /var/www/html
+# Install useful tools
+RUN apt-get -y install apt-utils nano wget dialog vim
 
-# Install PHP extensions and dependencies
+# Install important libraries
+RUN echo "\e[1;33mInstall important libraries\e[0m"
+RUN apt-get -y install --fix-missing \
+    apt-utils \
+    build-essential \
+    git \
+    curl \
+    libcurl4 \
+    libcurl4-openssl-dev \
+    zlib1g-dev \
+    libzip-dev \
+    zip \
+    libbz2-dev \
+    locales \
+    libmcrypt-dev \
+    libicu-dev \
+    libonig-dev \
+    libxml2-dev
+    
+RUN echo "\e[1;33mInstall important docker dependencies\e[0m"
 RUN docker-php-ext-install \
-    # Add any necessary PHP extensions here
+    exif \
+    pcntl \
+    bcmath \
+    ctype \
+    curl \
+    iconv \
+    xml \
+    soap \
+    pcntl \
+    mbstring \
+    tokenizer \
+    bz2 \
+    zip \
+    intl
 
-# Set proper file permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Install Postgre PDO
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
 
-# Expose port 9000 (FPM default)
-EXPOSE 9000
-
-# Start PHP-FPM
-CMD ["php-fpm"]
