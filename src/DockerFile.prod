@@ -26,9 +26,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_pgsql \
     && docker-php-source delete \
 
-COPY . /var/www/
+COPY . /var/www/public/
 
-COPY ./.env /var/www/.env
+COPY ./.env /var/www/public/.env
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
