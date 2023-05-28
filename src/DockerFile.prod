@@ -19,4 +19,4 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN rm -rf vendor
 
 
-CMD ["/start.sh"]
+# CMD ["/start.sh"]
